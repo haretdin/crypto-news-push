@@ -1,0 +1,3 @@
+# Copy this file to local.properties and fill in your DeepSeek API key.
+# You can also keep sdk.dir here if you build locally with Android Studio.
+DEEPSEEK_API_KEY=your_deepseek_api_key

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">crypto news push</string>
+    <string name="notification_channel_name">Crypto News Alerts</string>
+    <string name="notification_channel_description">Live crypto news pushed from BWEnews</string>
+    <string name="service_notification_title">Crypto news listener is active</string>
+    <string name="service_notification_text">Listening to BWEnews WebSocket for live updates.</string>
+</resources>
