@@ -1,36 +1,40 @@
 # Privacy Policy
 
-## Summary
+## Overview
 
-`crypto news push` is designed to deliver crypto news alerts to the device with minimal data collection.
-
-## What this app does
-
-- Connects to configured upstream news feeds such as WebSocket and RSS sources
-- Stores recent news items locally on the device
-- Shows local notifications after the device receives qualifying news
-
-## What this app does not do by default
-
-- No account creation
-- No user profile system
-- No first-party cloud backend operated by this repository
-- No analytics or advertising SDK intentionally included by this project
+`crypto news push` fetches public news and feed content directly on the device and displays it to the user. The app does not require user registration and does not operate its own central backend for account storage.
 
 ## Data Handling
 
-- News payloads fetched from upstream providers may be stored locally in the app database for display and notification deduplication.
-- Notification content is generated locally from received news items.
-- Optional API keys, if configured by a developer or user for custom builds, are expected to be stored locally and are not transmitted to a project-operated backend.
+The app may process the following categories of data locally on the device:
 
-## Third-Party Services
+- News titles and summaries fetched from public WebSocket or RSS sources
+- Source URLs attached to those news items
+- Timestamps and parsed symbols used for display and notification logic
 
-This app depends on third-party upstream data providers selected by the app configuration or source code. Those providers may receive the device IP address and request metadata as part of normal network communication.
+This information is stored locally in the app database to support the recent-news list and notifications.
 
-## Your Responsibility When Self-Hosting or Modifying
+## Network Requests
 
-If you fork, redistribute, or modify this project, you are responsible for updating this privacy policy to match your own distribution, telemetry, backend services, and legal obligations.
+The app connects directly to third-party providers to fetch news data. These providers may receive the device IP address and other standard network metadata as part of normal HTTP or WebSocket communication.
+
+If a fork re-enables translation functionality, translation requests may be sent directly from the device to DeepSeek using a user-supplied API key.
+
+## Notifications
+
+Notifications are generated locally on the device after news items are received and processed.
+
+## Credentials
+
+This public repository does not include:
+
+- release keystores
+- signing passwords
+- private API secrets
+- private backend credentials
 
 ## Contact
+
+For privacy questions, contact:
 
 haretdin@proton.me

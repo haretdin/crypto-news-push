@@ -13,10 +13,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,9 +27,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -78,22 +81,28 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun NewsScreen(viewModel: MainViewModel) {
     val news by viewModel.news.collectAsStateWithLifecycle()
+    val isRefreshing by viewModel.isRefreshing.collectAsStateWithLifecycle()
+    val pullRefreshState = rememberPullRefreshState(
+        refreshing = isRefreshing,
+        onRefresh = viewModel::refresh
+    )
 
     Scaffold(containerColor = Color.White) { innerPadding ->
-        Surface(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.White)
                 .padding(innerPadding)
+                .pullRefresh(pullRefreshState)
         ) {
             Column(modifier = Modifier.fillMaxSize()) {
                 Header()
                 if (news.isEmpty()) {
-                    EmptyState()
+                    EmptyState(isRefreshing = isRefreshing)
                 } else {
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
@@ -105,6 +114,13 @@ private fun NewsScreen(viewModel: MainViewModel) {
                     }
                 }
             }
+            PullRefreshIndicator(
+                refreshing = isRefreshing,
+                state = pullRefreshState,
+                modifier = Modifier.align(Alignment.TopCenter),
+                backgroundColor = Color.White,
+                contentColor = Color.Black
+            )
         }
     }
 }
@@ -124,7 +140,7 @@ private fun Header() {
         )
         Spacer(modifier = Modifier.height(6.dp))
         Text(
-            text = "Receive Crypto News and exchange announcements in real time with readability first.\n实时接收 Crypto News 新闻与交易所公告，优先保证信息清晰可读。",
+            text = "Receive crypto news and exchange announcements in real time. Updates refresh automatically every 60 seconds, and you can pull down to refresh now.",
             style = MaterialTheme.typography.bodyMedium,
             color = Color.Black
         )
@@ -132,7 +148,7 @@ private fun Header() {
 }
 
 @Composable
-private fun EmptyState() {
+private fun EmptyState(isRefreshing: Boolean) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -140,7 +156,10 @@ private fun EmptyState() {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             CircularProgressIndicator(color = Color(0xFFF97316))
             Spacer(modifier = Modifier.height(12.dp))
-            Text("Waiting for live news...", color = Color.Black)
+            Text(
+                if (isRefreshing) "Refreshing feeds..." else "Waiting for live news...",
+                color = Color.Black
+            )
         }
     }
 }

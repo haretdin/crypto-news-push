@@ -60,7 +60,7 @@ fun rssItemToEntity(
     timestamp: Long
 ): NewsEntity = NewsEntity(
     feedType = FEED_TYPE_RSS,
-    uniqueKey = "rss:$timestamp:${newsTitle.hashCode()}",
+    uniqueKey = "rss:$sourceName:$timestamp:${newsTitle.hashCode()}",
     sourceName = sourceName,
     newsTitle = newsTitle,
     coinsIncludedCsv = coinsIncluded.joinToString(", "),

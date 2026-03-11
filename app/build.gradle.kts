@@ -15,9 +15,27 @@ val localProperties = Properties().apply {
     }
 }
 
+val releaseSigningProperties = Properties().apply {
+    val file = rootProject.file("release-signing.properties")
+    if (file.exists()) {
+        file.inputStream().use { this.load(it) }
+    }
+}
+
 android {
     namespace = "com.cryptonews.push"
     compileSdk = 35
+
+    signingConfigs {
+        if (releaseSigningProperties.isNotEmpty()) {
+            create("release") {
+                storeFile = rootProject.file(releaseSigningProperties.getProperty("storeFile"))
+                storePassword = releaseSigningProperties.getProperty("storePassword")
+                keyAlias = releaseSigningProperties.getProperty("keyAlias")
+                keyPassword = releaseSigningProperties.getProperty("keyPassword")
+            }
+        }
+    }
 
     defaultConfig {
         applicationId = "com.cryptonews.push"
@@ -42,6 +60,9 @@ android {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
+            if (releaseSigningProperties.isNotEmpty()) {
+                signingConfig = signingConfigs.getByName("release")
+            }
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -85,6 +106,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3:1.3.1")
+    implementation("androidx.compose.material:material")
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.navigation:navigation-compose:2.8.5")
 
