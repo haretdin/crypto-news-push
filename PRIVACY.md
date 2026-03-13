@@ -1,40 +1,58 @@
 # Privacy Policy
 
-## Overview
+Last updated: March 13, 2026
 
-`crypto news push` fetches public news and feed content directly on the device and displays it to the user. The app does not require user registration and does not operate its own central backend for account storage.
+crypto news push ("the app", "we", "our", or "us") respects your privacy. This Privacy Policy explains how information is handled when you use the app.
 
-## Data Handling
+## Information We Collect
 
-The app may process the following categories of data locally on the device:
+crypto news push is designed to keep data collection minimal.
 
-- News titles and summaries fetched from public WebSocket or RSS sources
-- Source URLs attached to those news items
-- Timestamps and parsed symbols used for display and notification logic
+Depending on how the app is used, limited information may be processed such as:
 
-This information is stored locally in the app database to support the recent-news list and notifications.
+- news items fetched from public WebSocket and RSS sources
+- source URLs, timestamps, and parsed symbols used for display and notifications
+- local app state needed for the recent-news feed and notification delivery
 
-## Network Requests
+We do not require user accounts and we do not intentionally collect personally identifiable information such as:
 
-The app connects directly to third-party providers to fetch news data. These providers may receive the device IP address and other standard network metadata as part of normal HTTP or WebSocket communication.
+- name
+- email address
+- phone number
+- exact location
 
-If a fork re-enables translation functionality, translation requests may be sent directly from the device to DeepSeek using a user-supplied API key.
+## Third-Party Services
 
-## Notifications
+The app connects directly to third-party news and feed providers. Those providers may receive limited technical information such as IP address or standard request metadata as part of normal network communication.
 
-Notifications are generated locally on the device after news items are received and processed.
+If a fork or future version enables translation features, translation requests may be sent directly from the device to DeepSeek using a user-supplied API key.
 
-## Credentials
+These services operate under their own privacy policies.
 
-This public repository does not include:
+## How We Use Information
 
-- release keystores
-- signing passwords
-- private API secrets
-- private backend credentials
+Any information processed by the app may be used to:
+
+- fetch and display news updates
+- send local notifications for new items
+- improve app stability and reliability
+- support debugging and maintenance
+
+## Data Security
+
+We take reasonable steps to avoid exposing private material in the public repository. Release keys, signing files, and private credentials are not included in this GitHub project.
+
+## Children's Privacy
+
+crypto news push is not specifically directed toward children under the age of 13, and we do not knowingly collect personal information from children.
+
+## Changes to This Privacy Policy
+
+We may update this Privacy Policy from time to time. Any changes will be reflected in this repository or future app releases.
 
 ## Contact
 
-For privacy questions, contact:
+If you have questions about this Privacy Policy, please contact:
 
-haretdin@proton.me
+App Name: crypto news push  
+email: haretdin@proton.me
