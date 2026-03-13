@@ -72,16 +72,12 @@ Release build:
 
 Release signing files are intentionally not included in this public repository.
 
-## Privacy
+## Privacy and Terms
 
-This app does not require user accounts and does not provide its own backend service.
+See the dedicated policy pages:
 
-- News content is fetched directly from third-party news/feed providers.
-- Notification delivery is handled locally on the device.
-- If translation features are enabled in a fork, requests may be sent directly from the device to DeepSeek using your own API key.
-- This public repository does not contain production keys, keystores, or private credentials.
-
-See [PRIVACY.md](PRIVACY.md) for details.
+- [Privacy Policy](privacy-policy.md)
+- [Terms and Conditions](terms-and-conditions.md)
 
 ## License
 
